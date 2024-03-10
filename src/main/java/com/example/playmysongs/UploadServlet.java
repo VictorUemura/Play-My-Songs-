@@ -36,7 +36,7 @@ public class UploadServlet extends HttpServlet {
                 Singleton.adicionarMusica(novaMusica);
             } catch (IOException e) {
             }
-            response.sendRedirect("index.html");
+            response.sendRedirect("index.jsp");
         } catch (Exception e) {
 
         }
