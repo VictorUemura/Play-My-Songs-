@@ -16,7 +16,7 @@
 </head>
 <body>
 <!-- Login -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="assets/img/logo.png" alt="logo" height="70px"/>
@@ -42,23 +42,43 @@
     <!-- tocar musica -->
     <div class="container-fluid">
         <form class="d-flex">
-            <input class="form-control me-2" type="text" placeholder="Informe a música" id="idMusica">
-            <button class="btn btn-outline-success" type="submit">Busca</button>
+            <input class="form-control me-2" type="text" placeholder="Pesquise por nome da música/artista/gênero" id="idMusica">
         </form>
     </div>
-    <div class="group">
-        <table >
-            <%
-                for(Musica musica: Singleton.musicas){
-            %>
-            <audio controls>
-                <source src="<%= musica.nomeDiretorio()%>" type="audio/mpeg">
-            </audio>
-            <p><%= musica.getNomeMusica()%></p>
-            <%}%>
-        </table>
+    <div class="container">
+        <div class="row justify-content-center">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" style="width: 20%;">#</th>
+                    <th scope="col" style="width: 20%;">Nome Musica</th>
+                    <th scope="col" style="width: 20%;">Artista</th>
+                    <th scope="col" style="width: 20%;">Gênero</th>
+                    <th scope="col" style="width: 20%;">Musica</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    int i = 1;
+                    for(Musica musica: Singleton.musicas){
+                %>
+                <tr>
+                    <th scope="row"  style="vertical-align: middle;"><%= i++%></th>
+                    <td style="vertical-align: middle;"><%= musica.getNomeMusica()%></td>
+                    <td style="vertical-align: middle;"><%= musica.getNomeCantor()%></td>
+                    <td style="vertical-align: middle;"><%= musica.getEstiloMusica()%></td>
+                    <td style="vertical-align: middle;">
+                        <audio controls>
+                            <source src="<%= musica.nomeDiretorio()%>" type="audio/mpeg">
+                        </audio>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </div>
+<script src="script/buscaMusica.js"></script>
 </body>
 </html>
