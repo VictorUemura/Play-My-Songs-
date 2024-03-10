@@ -12,7 +12,7 @@
         <div class="col-md-8">
             <div class="border rounded p-4">
                 <h2 class="text-center mb-4">Carregar música</h2>
-                <form method="POST" action="up-servlet" enctype="multipart/form-data">
+                <form method="POST" action="up-servlet" enctype="multipart/form-data" novalidate>
                     <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating">
@@ -27,29 +27,30 @@
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="nomeMusica" placeholder="floatingButton" name="nomeMusica">
+                                <input type="text" class="form-control" id="nomeMusica" placeholder="floatingButton"
+                                       name="nomeMusica" checked>
                                 <label for="nomeMusica">Nome da música</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="nomeCantor" placeholder="floatingButton" name="nomeCantor">
+                        <input type="text" class="form-control" id="nomeCantor" placeholder="floatingButton"
+                               name="nomeCantor" checked>
                         <label for="nomeCantor">Nome do cantor</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="file" id="file" name="file">
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="destination" name="destination"
-                               placeholder="floatingButton">
-                        <label for="destination">Destino:</label>
+                        <input class="form-control" type="file" id="file" name="file" checked>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload</button>
+                    <a href="index.html">
+                        <button type="button" class="btn btn-danger">Voltar</button>
+                    </a>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+<script src="./script/verificaCaracteres.js"></script>
 </body>
 </html>

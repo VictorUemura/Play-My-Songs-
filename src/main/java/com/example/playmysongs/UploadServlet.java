@@ -17,8 +17,6 @@ import jakarta.servlet.annotation.*;
 public class UploadServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter writer = response.getWriter();
         try {
             Part filePart = request.getPart("file");
             Musica novaMusica = new Musica(request.getParameter("nomeMusica"), request.getParameter("genero"), request.getParameter("nomeCantor"));
@@ -38,13 +36,9 @@ public class UploadServlet extends HttpServlet {
                 Singleton.adicionarMusica(novaMusica);
             } catch (IOException e) {
             }
-
-            writer.println(fpasta.getAbsolutePath());
-            writer.close();
-
+            response.sendRedirect("index.html");
         } catch (Exception e) {
-            writer.println("Erro ao receber o arquivo");
-            writer.println("<br/> ERRO: " + e.getMessage());
+
         }
     }
 }
