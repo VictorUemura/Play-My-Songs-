@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Screen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="border rounded p-4">
+                <h2 class="text-center mb-4">Carregar música</h2>
+                <form method="POST" action="up-servlet" enctype="multipart/form-data">
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <select class="form-select" id="genero" aria-label="genero" name="genero">
+                                    <option selected value="sertanejo">Sertanejo</option>
+                                    <option value="pop">Pop</option>
+                                    <option value="funk">Funk</option>
+                                    <option value="rock">Rock</option>
+                                </select>
+                                <label for="genero">Selecione o gênero</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="nomeMusica" placeholder="floatingButton" name="nomeMusica">
+                                <label for="nomeMusica">Nome da música</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="nomeCantor" placeholder="floatingButton" name="nomeCantor">
+                        <label for="nomeCantor">Nome do cantor</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="file" id="file" name="file">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="destination" name="destination"
+                               placeholder="floatingButton">
+                        <label for="destination">Destino:</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
