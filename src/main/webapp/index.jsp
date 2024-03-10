@@ -1,4 +1,5 @@
 <%@ page import="com.example.playmysongs.entidades.Musica" %>
+<%@ page import="com.example.playmysongs.security.User" %>
 <%@ page import="com.example.playmysongs.entidades.Singleton" %><%--
   Created by IntelliJ IDEA.
   User: luisf
@@ -8,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Tela inicial</title>
@@ -25,11 +27,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex ms-auto">
-                <input class="form-control me-2" type="Login" placeholder="Login" aria-label="Login" id="login">
-                <input class="form-control me-2" type="Senha" placeholder="Senha" aria-label="Senha" id="senha">
+            <% User usuario = (User)session.getAttribute("usuario"); %>
+            <% if(usuario == null) {%>
+            <form class="d-flex ms-auto" action="<%=request.getContextPath()%>/login-servlet" method="POST">
+                <input class="form-control me-2" type="text" name="login" placeholder="Login">
+                <input class="form-control me-2" type="password" name="senha" placeholder="Senha">
                 <button class="btn btn-outline-success" type="submit">Login</button>
             </form>
+            <%} else { %>
         </div>
     </div>
 </nav>
@@ -58,6 +63,7 @@
             <%}%>
         </table>
     </div>
+    <% } %>
 
 </div>
 </body>

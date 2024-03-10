@@ -1,10 +1,12 @@
 package com.example.playmysongs.security;
 
 public class User {
-    private String nome;
+    private String login;
+    private String senha;
 
-    public User(String nome) {
-        this.nome = nome;
-
+    public User(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
     }
+
 }

@@ -1,37 +1,42 @@
 package com.example.playmysongs;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 import com.example.playmysongs.security.User;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 
 import java.io.IOException;
 
+@WebServlet(name = "loginServlet", value = "/login-servlet")
 public class AccesServlet extends HttpServlet {
-    public boolean senhaVerifica(String senha, String nome){
-        String aux = nome.substring(0, nome.indexOf("@"));
-        if(senha.compareTo(aux) == 0)
-            return true;
-        return false;
-    }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String nome =request.getParameter("login");
-        if(nome!=null){
-            String senha = request.getParameter("senha");
-            if(senha!=null && senhaVerifica(senha, nome)){
-                User usuario = new User(nome);
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String login = request.getParameter("login");
+        String senha = request.getParameter("senha");
+
+        if (login != null && login.contains("@")) {
+            String usernamePart = login.substring(0, login.indexOf('@'));
+
+            if (senha.equals(usernamePart)) {
                 HttpSession session = request.getSession();
-                session.setMaxInactiveInterval(60);
-                session.setAttribute("user", usuario);
-                response.sendRedirect("./uploadscreen.html");
-                return;
+                session.setAttribute("usuario", new User(login, senha));
+
+                String contextPath = request.getContextPath();
+                response.sendRedirect(contextPath + "/index.jsp");
+            } else {
+                erroLogin(request, response, "Senha inválida.");
             }
+        } else {
+            erroLogin(request, response, "Formato de e-mail inválido.");
         }
-        return;
     }
 
-    public void destroy() {
+    private void erroLogin(HttpServletRequest request, HttpServletResponse response, String mensagemErro) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("errorMessage", mensagemErro);
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
+
+
+    public void destroy() {}
 }
